@@ -14,70 +14,105 @@
         body {
             width: 100%;
             height: 100vh;
-            background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 30%, #0f1428 60%, #0a0e27 100%);
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 20%, #16213e 50%, #0f3460 70%, #0a0a0a 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
             position: relative;
         }
 
-        /* Realistic gym floor texture */
+        /* Gym ceiling texture and lights */
         body::before {
             content: '';
             position: absolute;
             width: 100%;
-            height: 100%;
-            background-image: 
-                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px),
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px);
-            pointer-events: none;
+            height: 40%;
+            top: 0;
+            background: linear-gradient(180deg, #1a1a2e 0%, transparent 100%);
             z-index: 1;
         }
 
-        /* Lighting effects - gym atmosphere */
-        .light-top-left {
+        /* Ceiling lights effect */
+        .ceiling-lights {
             position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(100, 50, 200, 0.2) 0%, transparent 70%);
-            top: -150px;
-            left: -150px;
-            border-radius: 50%;
-            pointer-events: none;
+            top: 0;
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-around;
             z-index: 2;
+            pointer-events: none;
         }
 
-        .light-bottom-right {
+        .light {
+            width: 8px;
+            height: 50px;
+            background: linear-gradient(to bottom, rgba(200, 200, 255, 0.4) 0%, rgba(150, 150, 255, 0.2) 100%);
+            border-radius: 4px;
+        }
+
+        /* Left dumbbell silhouette */
+        .equipment-left {
+            position: absolute;
+            left: 40px;
+            bottom: 200px;
+            z-index: 4;
+            opacity: 0.15;
+        }
+
+        /* Right treadmill silhouette */
+        .equipment-right {
+            position: absolute;
+            right: 50px;
+            bottom: 120px;
+            z-index: 4;
+            opacity: 0.12;
+        }
+
+        /* Lighting effects */
+        .light-purple {
             position: absolute;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(50, 150, 255, 0.15) 0%, transparent 70%);
-            bottom: -200px;
-            right: -200px;
+            background: radial-gradient(circle, rgba(157, 78, 221, 0.15) 0%, transparent 70%);
+            top: -100px;
+            left: -150px;
             border-radius: 50%;
-            pointer-events: none;
             z-index: 2;
+            pointer-events: none;
         }
 
-        /* Vertical light lines (gym ceiling lights) */
-        .light-line {
+        .light-blue {
             position: absolute;
-            background: linear-gradient(to bottom, rgba(150, 180, 255, 0.25) 0%, rgba(150, 180, 255, 0.1) 30%, transparent 60%);
-            pointer-events: none;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(50, 150, 255, 0.1) 0%, transparent 70%);
+            bottom: -200px;
+            right: -250px;
+            border-radius: 50%;
             z-index: 2;
+            pointer-events: none;
         }
 
-        .light-line:nth-child(3) {
-            width: 3px;
-            height: 85%;
-            left: 15%;
+        /* Vertical light lines (from ceiling) */
+        .light-column {
+            position: absolute;
+            background: linear-gradient(to bottom, rgba(200, 200, 255, 0.2) 0%, transparent 80%);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .light-column:nth-child(1) {
+            width: 4px;
+            height: 70%;
+            left: 20%;
             top: 0;
-            opacity: 0.5;
+            opacity: 0.6;
         }
 
-        .light-line:nth-child(4) {
-            width: 3px;
-            height: 85%;
-            right: 15%;
+        .light-column:nth-child(2) {
+            width: 4px;
+            height: 70%;
+            right: 20%;
             top: 0;
             opacity: 0.4;
         }
@@ -90,12 +125,12 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            padding: 50px 20px 60px 20px;
+            padding: 60px 20px 80px 20px;
             position: relative;
             z-index: 10;
         }
 
-        /* Logo container */
+        /* Logo section */
         .logo-container {
             flex: 1;
             display: flex;
@@ -104,110 +139,92 @@
             position: relative;
         }
 
-        /* Outer bright ring */
-        .logo-ring {
+        /* Outer bright ring like on signage */
+        .logo-outer-ring {
             position: absolute;
-            width: 240px;
-            height: 240px;
-            border: 6px solid rgba(150, 150, 200, 0.6);
+            width: 280px;
+            height: 280px;
+            border: 8px solid rgba(200, 200, 220, 0.7);
             border-radius: 50%;
-            box-shadow: 0 0 0 2px rgba(100, 100, 150, 0.4),
-                        0 0 40px rgba(100, 50, 255, 0.3),
-                        inset 0 0 30px rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 0 3px rgba(150, 150, 200, 0.5),
+                        0 0 50px rgba(157, 78, 221, 0.4),
+                        inset 0 0 40px rgba(255, 255, 255, 0.08),
+                        0 30px 60px rgba(0, 0, 0, 0.6);
+            animation: ring-glow 3s ease-in-out infinite;
         }
 
+        @keyframes ring-glow {
+            0%, 100% {
+                box-shadow: 0 0 0 3px rgba(150, 150, 200, 0.5),
+                            0 0 50px rgba(157, 78, 221, 0.4),
+                            inset 0 0 40px rgba(255, 255, 255, 0.08),
+                            0 30px 60px rgba(0, 0, 0, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 0 3px rgba(180, 180, 220, 0.6),
+                            0 0 80px rgba(157, 78, 221, 0.6),
+                            inset 0 0 50px rgba(255, 255, 255, 0.12),
+                            0 30px 60px rgba(0, 0, 0, 0.6);
+            }
+        }
+
+        /* Inner dark circle */
         .logo-circle {
-            width: 220px;
-            height: 220px;
-            background: radial-gradient(circle at 35% 35%, rgba(50, 50, 100, 0.8), rgba(10, 10, 40, 0.9));
-            border: 2px solid rgba(100, 100, 200, 0.3);
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle at 40% 40%, rgba(60, 50, 120, 0.9), rgba(15, 15, 50, 0.95));
+            border: 3px solid rgba(120, 100, 200, 0.4);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            box-shadow: 0 0 60px rgba(100, 50, 255, 0.25),
-                        inset 0 0 40px rgba(100, 50, 255, 0.1),
-                        0 20px 50px rgba(0, 0, 0, 0.5);
-            animation: glow-pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes glow-pulse {
-            0%, 100% {
-                box-shadow: 0 0 60px rgba(100, 50, 255, 0.25),
-                            inset 0 0 40px rgba(100, 50, 255, 0.1),
-                            0 20px 50px rgba(0, 0, 0, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 100px rgba(100, 50, 255, 0.4),
-                            inset 0 0 50px rgba(100, 50, 255, 0.15),
-                            0 20px 50px rgba(0, 0, 0, 0.5);
-            }
+            box-shadow: 0 0 80px rgba(157, 78, 221, 0.3),
+                        inset 0 0 50px rgba(157, 78, 221, 0.15),
+                        0 25px 60px rgba(0, 0, 0, 0.7);
         }
 
         .logo-text {
-            font-size: 60px;
+            font-size: 72px;
             font-weight: 900;
-            background: linear-gradient(135deg, #ffffff 0%, #f0f0ff 40%, #9d4edd 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5ff 35%, #b88dff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: 3px;
-            filter: drop-shadow(0 0 15px rgba(100, 50, 255, 0.4));
+            letter-spacing: 4px;
+            filter: drop-shadow(0 0 20px rgba(157, 78, 221, 0.5));
             font-style: italic;
+            text-shadow: 0 0 30px rgba(157, 78, 221, 0.3);
         }
 
-        /* Equipment silhouettes - subtle background decoration */
-        .equipment {
-            position: absolute;
-            opacity: 0.08;
-            pointer-events: none;
-        }
-
-        .dumbbell {
-            width: 120px;
-            height: 40px;
-            position: absolute;
-        }
-
-        .dumbbell-left {
-            left: 30px;
-            bottom: 200px;
-            transform: rotate(-15deg);
-        }
-
-        .dumbbell-right {
-            right: 40px;
-            bottom: 180px;
-            transform: rotate(25deg);
-        }
-
-        /* Menu container (bottom part) */
+        /* Menu area */
         .menu-area {
             width: 100%;
-            padding: 20px 20px 30px 20px;
-            background: linear-gradient(to top, rgba(10, 14, 39, 0.95), rgba(10, 14, 39, 0.7), transparent);
+            padding: 30px 20px 40px 20px;
+            background: linear-gradient(to top, rgba(10, 10, 20, 0.98), rgba(20, 20, 40, 0.8), transparent);
             display: flex;
-            gap: 12px;
+            gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
             z-index: 20;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(157, 78, 221, 0.1);
         }
 
         .menu-button {
-            padding: 14px 28px;
-            background: linear-gradient(135deg, rgba(100, 50, 255, 0.2), rgba(80, 40, 200, 0.15));
-            border: 2px solid rgba(100, 50, 255, 0.5);
+            padding: 16px 32px;
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.25), rgba(100, 50, 180, 0.15));
+            border: 2.5px solid rgba(157, 78, 221, 0.6);
             color: #ffffff;
-            border-radius: 30px;
-            font-size: 15px;
+            border-radius: 35px;
+            font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            backdrop-filter: blur(15px);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.2);
         }
 
         .menu-button::before {
@@ -217,41 +234,71 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .menu-button:hover::before {
+            left: 100%;
         }
 
         .menu-button:hover {
-            background: linear-gradient(135deg, rgba(120, 60, 255, 0.35), rgba(100, 50, 200, 0.3));
-            border-color: rgba(150, 80, 255, 0.8);
-            box-shadow: 0 0 30px rgba(100, 50, 255, 0.5),
-                        inset 0 0 20px rgba(100, 50, 255, 0.1);
-            transform: translateY(-3px);
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.4), rgba(120, 60, 200, 0.3));
+            border-color: rgba(200, 120, 255, 0.9);
+            box-shadow: 0 0 40px rgba(157, 78, 221, 0.6),
+                        inset 0 0 20px rgba(157, 78, 221, 0.15);
+            transform: translateY(-4px);
         }
 
         .menu-button.active {
-            background: linear-gradient(135deg, rgba(130, 70, 255, 0.5), rgba(100, 50, 220, 0.4));
-            border-color: rgba(200, 100, 255, 0.9);
-            box-shadow: 0 0 40px rgba(130, 70, 255, 0.7),
-                        inset 0 0 25px rgba(130, 70, 255, 0.2);
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.5), rgba(100, 50, 200, 0.4));
+            border-color: rgba(220, 130, 255, 1);
+            box-shadow: 0 0 50px rgba(157, 78, 221, 0.8),
+                        inset 0 0 30px rgba(157, 78, 221, 0.25),
+                        0 0 20px rgba(157, 78, 221, 0.4);
             color: #ffffff;
             font-weight: 800;
+            text-shadow: 0 0 10px rgba(157, 78, 221, 0.5);
         }
 
         .menu-button:active {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-    <div class="light-top-left"></div>
-    <div class="light-bottom-right"></div>
-    <div class="light-line"></div>
-    <div class="light-line"></div>
+    <!-- Ceiling lights -->
+    <div class="ceiling-lights">
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+    </div>
+
+    <!-- Light effects -->
+    <div class="light-purple"></div>
+    <div class="light-blue"></div>
+    <div class="light-column"></div>
+    <div class="light-column"></div>
+
+    <!-- Equipment silhouettes -->
+    <svg class="equipment-left" width="140" height="80" viewBox="0 0 140 80">
+        <circle cx="20" cy="40" r="15" fill="#666" opacity="0.7"/>
+        <rect x="40" y="35" width="60" height="10" fill="#777" rx="3"/>
+        <circle cx="120" cy="40" r="15" fill="#666" opacity="0.7"/>
+    </svg>
+
+    <svg class="equipment-right" width="200" height="120" viewBox="0 0 200 120">
+        <rect x="15" y="40" width="170" height="60" fill="#555" opacity="0.6" rx="8"/>
+        <rect x="25" y="50" width="150" height="25" fill="#666" opacity="0.7" rx="4"/>
+        <circle cx="35" cy="105" r="10" fill="#555" opacity="0.5"/>
+        <circle cx="165" cy="105" r="10" fill="#555" opacity="0.5"/>
+    </svg>
 
     <div class="container">
         <div class="logo-container">
-            <div class="logo-ring"></div>
+            <div class="logo-outer-ring"></div>
             <div class="logo-circle">
                 <div class="logo-text">NGFit</div>
             </div>
@@ -267,11 +314,9 @@
 
     <script>
         function switchPage(button) {
-            // Remove active class from all buttons
             document.querySelectorAll('.menu-button').forEach(btn => {
                 btn.classList.remove('active');
             });
-            // Add active class to clicked button
             button.classList.add('active');
         }
     </script>
