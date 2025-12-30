@@ -56,7 +56,7 @@
             flex: 1;
             background: linear-gradient(135deg, #0f1f3a 0%, #1a0f3a 50%, #0f3a5a 100%);
             padding: 60px 20px 80px 20px;
-            display: flex;
+            display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -65,6 +65,97 @@
             overflow: hidden;
         }
 
+        .screen.active {
+            display: flex;
+        }
+
+        /* Registration Page Styles */
+        .reg-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .reg-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(135deg, #9d4edd 0%, #00b4db 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .reg-form {
+            width: 100%;
+            max-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-input {
+            padding: 12px 16px;
+            border: 2px solid rgba(157, 78, 221, 0.5);
+            border-radius: 12px;
+            background: rgba(157, 78, 221, 0.1);
+            color: #fff;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: rgba(200, 120, 255, 0.8);
+            background: rgba(157, 78, 221, 0.2);
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.3);
+        }
+
+        .start-btn {
+            padding: 14px 32px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.3), rgba(0, 180, 219, 0.2));
+            border: 2px solid rgba(157, 78, 221, 0.5);
+            border-radius: 20px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .start-btn:hover {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.4), rgba(0, 180, 219, 0.3));
+            border-color: rgba(200, 120, 255, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.3);
+        }
+
+        /* Main Menu Styles */
         .logo-container {
             display: flex;
             flex-direction: column;
@@ -118,8 +209,7 @@
             text-decoration: none;
         }
 
-        .menu-button:hover,
-        .menu-button:active {
+        .menu-button:hover, .menu-button:active {
             background: linear-gradient(135deg, rgba(157, 78, 221, 0.4), rgba(0, 180, 219, 0.3));
             border-color: rgba(200, 120, 255, 0.8);
             transform: translateY(-2px);
@@ -150,32 +240,90 @@
 <body>
     <div class="phone-frame">
         <div class="notch"></div>
-        <div class="screen">
+        
+        <!-- Registration Page -->
+        <div class="screen" id="registrationScreen">
+            <div class="reg-container">
+                <h1 class="reg-title">Добро пожаловать</h1>
+                <form class="reg-form" id="registrationForm">
+                    <div class="form-group">
+                        <label class="form-label">Имя</label>
+                        <input type="text" class="form-input" id="nameInput" placeholder="Введите ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" id="emailInput" placeholder="Введите email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Возраст</label>
+                        <input type="number" class="form-input" id="ageInput" placeholder="Введите возраст" required>
+                    </div>
+                    <button type="submit" class="start-btn">Начать</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main Menu Page -->
+        <div class="screen" id="menuScreen">
             <div class="logo-container">
                 <div class="logo-circle">
-                    <div class="logo-text">NGFit</div>
+                    <span class="logo-text">NGFit</span>
                 </div>
             </div>
-
             <div class="menu-grid">
                 <a href="schedule.html" class="menu-button">
-                    <div class="menu-icon">📋</div>
-                    <div class="menu-label">Расписание</div>
+                    <span class="menu-icon">📋</span>
+                    <span class="menu-label">Расписание</span>
                 </a>
                 <a href="data.html" class="menu-button">
-                    <div class="menu-icon">📊</div>
-                    <div class="menu-label">Данные</div>
+                    <span class="menu-icon">📊</span>
+                    <span class="menu-label">Данные</span>
                 </a>
                 <a href="profile.html" class="menu-button">
-                    <div class="menu-icon">👤</div>
-                    <div class="menu-label">Профиль</div>
+                    <span class="menu-icon">👤</span>
+                    <span class="menu-label">Профиль</span>
                 </a>
                 <a href="finance.html" class="menu-button">
-                    <div class="menu-icon">💰</div>
-                    <div class="menu-label">Финансы</div>
+                    <span class="menu-icon">💰</span>
+                    <span class="menu-label">Финансы</span>
                 </a>
             </div>
         </div>
     </div>
+
+    <script>
+        // Check if user is registered on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const isRegistered = localStorage.getItem('ngfitUserRegistered');
+            showScreen(isRegistered ? 'menuScreen' : 'registrationScreen');
+        });
+
+        // Handle registration form submission
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('nameInput').value;
+            const email = document.getElementById('emailInput').value;
+            const age = document.getElementById('ageInput').value;
+            
+            // Save user data to localStorage
+            localStorage.setItem('ngfitUserName', name);
+            localStorage.setItem('ngfitUserEmail', email);
+            localStorage.setItem('ngfitUserAge', age);
+            localStorage.setItem('ngfitUserRegistered', 'true');
+            
+            // Show main menu
+            showScreen('menuScreen');
+        });
+
+        function showScreen(screenId) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            // Show the selected screen
+            document.getElementById(screenId).classList.add('active');
+        }
+    </script>
 </body>
 </html>
