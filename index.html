@@ -28,7 +28,6 @@
             padding: 20px;
         }
 
-        /* Light effects */
         .light-purple {
             position: fixed;
             width: 600px;
@@ -53,7 +52,6 @@
             pointer-events: none;
         }
 
-        /* Mobile phone frame */
         .phone-frame {
             width: 360px;
             height: 780px;
@@ -67,7 +65,6 @@
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0a0a0a 100%);
         }
 
-        /* Notch */
         .notch {
             position: absolute;
             top: 0;
@@ -80,7 +77,6 @@
             z-index: 20;
         }
 
-        /* Content wrapper */
         .screen-content {
             width: 100%;
             height: 100%;
@@ -93,7 +89,6 @@
             z-index: 5;
         }
 
-        /* Logo section */
         .logo-container {
             display: flex;
             justify-content: center;
@@ -153,7 +148,6 @@
             font-style: italic;
         }
 
-        /* Menu grid */
         .menu-area {
             width: 100%;
             display: grid;
@@ -215,13 +209,24 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 20px;
+        }
+
+        .menu-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: rgba(100, 200, 150, 0.8);
+            fill: none;
+            stroke-width: 2;
         }
 
         .menu-item.active .menu-icon {
             background: linear-gradient(135deg, rgba(100, 200, 150, 0.5), rgba(80, 180, 120, 0.4));
             border-color: rgba(150, 255, 180, 0.8);
             box-shadow: 0 0 15px rgba(100, 200, 150, 0.6);
+        }
+
+        .menu-item.active .menu-icon svg {
+            stroke: rgba(150, 255, 180, 1);
         }
 
         .menu-label {
@@ -250,19 +255,54 @@
 
             <div class="menu-area">
                 <div class="menu-item active" onclick="selectMenu(this)">
-                    <div class="menu-icon">📋</div>
+                    <div class="menu-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="4" width="7" height="3" rx="1"/>
+                            <rect x="3" y="9" width="7" height="3" rx="1"/>
+                            <rect x="3" y="14" width="7" height="3" rx="1"/>
+                            <rect x="14" y="4" width="7" height="3" rx="1"/>
+                            <rect x="14" y="9" width="7" height="3" rx="1"/>
+                            <rect x="14" y="14" width="7" height="3" rx="1"/>
+                        </svg>
+                    </div>
                     <div class="menu-label">Расписание</div>
                 </div>
                 <div class="menu-item" onclick="selectMenu(this)">
-                    <div class="menu-icon">💪</div>
+                    <div class="menu-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="8" cy="13" r="4"/>
+                            <circle cx="16" cy="13" r="4"/>
+                            <path d="M 8 4 L 8 8"/>
+                            <path d="M 16 4 L 16 8"/>
+                            <path d="M 6 13 L 10 13"/>
+                            <path d="M 14 13 L 18 13"/>
+                        </svg>
+                    </div>
                     <div class="menu-label">Тренировки</div>
                 </div>
                 <div class="menu-item" onclick="selectMenu(this)">
-                    <div class="menu-icon">👤</div>
+                    <div class="menu-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="8" r="4"/>
+                            <path d="M 4 20 Q 4 15 12 15 Q 20 15 20 20"/>
+                        </svg>
+                    </div>
                     <div class="menu-label">Профиль</div>
                 </div>
                 <div class="menu-item" onclick="selectMenu(this)">
-                    <div class="menu-icon">⚙️</div>
+                    <div class="menu-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="2"/>
+                            <circle cx="12" cy="4" r="1.5" opacity="0.7"/>
+                            <circle cx="12" cy="20" r="1.5" opacity="0.7"/>
+                            <circle cx="4" cy="12" r="1.5" opacity="0.7"/>
+                            <circle cx="20" cy="12" r="1.5" opacity="0.7"/>
+                            <circle cx="7" cy="7" r="1.5" opacity="0.7"/>
+                            <circle cx="17" cy="17" r="1.5" opacity="0.7"/>
+                            <circle cx="7" cy="17" r="1.5" opacity="0.7"/>
+                            <circle cx="17" cy="7" r="1.5" opacity="0.7"/>
+                        </svg>
+                    </div>
                     <div class="menu-label">Настройки</div>
                 </div>
             </div>
