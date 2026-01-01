@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>NGFit - Exercises</title>
+  <title>NGFit - Упражнения</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * {
@@ -90,6 +90,62 @@
       background: rgba(255, 255, 255, 0.3);
     }
 
+    .form-section {
+      background: rgba(255, 255, 255, 0.95);
+      margin: 0 12px 10px;
+      padding: 12px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: inherit;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+    }
+
+    .add-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #19c37d 0%, #1fe28f 100%);
+      color: #000;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .add-btn:active {
+      transform: scale(0.98);
+    }
+
     .table-container {
       flex: 1;
       overflow-y: auto;
@@ -148,6 +204,16 @@
     tbody tr:hover {
       background: rgba(102, 126, 234, 0.08);
     }
+
+    .empty-state {
+      text-align: center;
+      padding: 30px 20px;
+      color: #999;
+    }
+
+    .empty-state-text {
+      font-size: 13px;
+    }
   </style>
 </head>
 <body>
@@ -155,65 +221,100 @@
     <div class="phone-notch"></div>
     <div class="phone-content">
       <div class="header">
-        <div class="header-title">Exercises</div>
-        <button class="back-btn" onclick="history.back()">← Back</button>
+        <div class="header-title">Упражнения</div>
+        <button class="back-btn" onclick="history.back()">← Назад</button>
+      </div>
+
+      <div class="form-section">
+        <div class="form-group">
+          <label>Упражнение</label>
+          <input type="text" id="exerciseName" placeholder="Название">
+        </div>
+        <div class="form-group">
+          <label>Мышца</label>
+          <input type="text" id="muscleName" placeholder="Группа мышц">
+        </div>
+        <div class="form-group">
+          <label>Тип</label>
+          <input type="text" id="exerciseType" placeholder="Штанга, Гантель...">
+        </div>
+        <div class="form-group">
+          <label>Повторения</label>
+          <input type="text" id="reps" placeholder="8-12">
+        </div>
+        <button class="add-btn" onclick="addExercise()">+ Добавить упражнение</button>
       </div>
 
       <div class="table-container">
-        <table>
+        <table id="exerciseTable">
           <thead>
             <tr>
-              <th>Exercise</th>
-              <th>Muscle</th>
-              <th>Type</th>
-              <th>Reps</th>
+              <th>Упражнение</th>
+              <th>Мышца</th>
+              <th>Тип</th>
+              <th>Повт.</th>
             </tr>
           </thead>
-          <tbody>
-            <tr><td>Barbell Bench Press</td><td>Chest</td><td>Barbell</td><td>8-12</td></tr>
-            <tr><td>Dumbbell Bench Press</td><td>Chest</td><td>Dumbbell</td><td>8-12</td></tr>
-            <tr><td>Incline Bench Press</td><td>Chest</td><td>Barbell</td><td>8-12</td></tr>
-            <tr><td>Cable Flyes</td><td>Chest</td><td>Cable</td><td>12-15</td></tr>
-            <tr><td>Push-ups</td><td>Chest</td><td>Bodyweight</td><td>10-20</td></tr>
-            <tr><td>Dips</td><td>Chest</td><td>Bodyweight</td><td>8-12</td></tr>
-            <tr><td>Machine Chest Press</td><td>Chest</td><td>Machine</td><td>12-15</td></tr>
-            <tr><td>Barbell Row</td><td>Back</td><td>Barbell</td><td>6-10</td></tr>
-            <tr><td>Dumbbell Row</td><td>Back</td><td>Dumbbell</td><td>8-12</td></tr>
-            <tr><td>Lat Pulldown</td><td>Back</td><td>Cable</td><td>10-12</td></tr>
-            <tr><td>Pull-ups</td><td>Back</td><td>Bodyweight</td><td>8-12</td></tr>
-            <tr><td>TRX Row</td><td>Back</td><td>TRX</td><td>10-12</td></tr>
-            <tr><td>Seated Row</td><td>Back</td><td>Machine</td><td>12-15</td></tr>
-            <tr><td>Barbell Squat</td><td>Legs</td><td>Barbell</td><td>6-10</td></tr>
-            <tr><td>Dumbbell Squat</td><td>Legs</td><td>Dumbbell</td><td>8-12</td></tr>
-            <tr><td>Leg Press</td><td>Legs</td><td>Machine</td><td>10-12</td></tr>
-            <tr><td>Leg Curl</td><td>Legs</td><td>Machine</td><td>12-15</td></tr>
-            <tr><td>Leg Extension</td><td>Legs</td><td>Machine</td><td>12-15</td></tr>
-            <tr><td>Lunges</td><td>Legs</td><td>Dumbbell</td><td>10-12</td></tr>
-            <tr><td>Calf Raises</td><td>Legs</td><td>Barbell</td><td>15-20</td></tr>
-            <tr><td>Barbell Deadlift</td><td>Back</td><td>Barbell</td><td>4-8</td></tr>
-            <tr><td>Romanian Deadlift</td><td>Back</td><td>Barbell</td><td>8-10</td></tr>
-            <tr><td>Barbell Curl</td><td>Biceps</td><td>Barbell</td><td>8-12</td></tr>
-            <tr><td>Dumbbell Curl</td><td>Biceps</td><td>Dumbbell</td><td>10-12</td></tr>
-            <tr><td>Cable Curl</td><td>Biceps</td><td>Cable</td><td>10-12</td></tr>
-            <tr><td>EZ Bar Curl</td><td>Biceps</td><td>Barbell</td><td>8-12</td></tr>
-            <tr><td>Hammer Curl</td><td>Biceps</td><td>Dumbbell</td><td>10-12</td></tr>
-            <tr><td>Triceps Dips</td><td>Triceps</td><td>Bodyweight</td><td>8-12</td></tr>
-            <tr><td>Triceps Pushdown</td><td>Triceps</td><td>Cable</td><td>12-15</td></tr>
-            <tr><td>Skull Crushers</td><td>Triceps</td><td>Barbell</td><td>8-12</td></tr>
-            <tr><td>Overhead Press</td><td>Shoulders</td><td>Barbell</td><td>6-10</td></tr>
-            <tr><td>Dumbbell Shoulder Press</td><td>Shoulders</td><td>Dumbbell</td><td>8-12</td></tr>
-            <tr><td>Lateral Raise</td><td>Shoulders</td><td>Dumbbell</td><td>12-15</td></tr>
-            <tr><td>Face Pulls</td><td>Shoulders</td><td>Cable</td><td>15-20</td></tr>
-            <tr><td>Shrugs</td><td>Shoulders</td><td>Barbell</td><td>12-15</td></tr>
-            <tr><td>Plank</td><td>Core</td><td>Bodyweight</td><td>30-60s</td></tr>
-            <tr><td>Crunches</td><td>Core</td><td>Bodyweight</td><td>15-20</td></tr>
-            <tr><td>Russian Twists</td><td>Core</td><td>Bodyweight</td><td>15-20</td></tr>
-            <tr><td>Leg Raises</td><td>Core</td><td>Bodyweight</td><td>10-15</td></tr>
-            <tr><td>Cable Woodchops</td><td>Core</td><td>Cable</td><td>12-15</td></tr>
+          <tbody id="tableBody">
+            <tr>
+              <td colspan="4" style="text-align: center; padding: 30px 6px; color: #999;">
+                Нет упражнений. Добавьте новое!
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
+
+  <script>
+    // Загрузить упражнения из localStorage
+    function loadExercises() {
+      const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
+      const tbody = document.getElementById('tableBody');
+      
+      if (exercises.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 30px 6px; color: #999;">Нет упражнений. Добавьте новое!</td></tr>';
+      } else {
+        tbody.innerHTML = exercises.map((ex, index) => `
+          <tr>
+            <td>${ex.name}</td>
+            <td>${ex.muscle}</td>
+            <td>${ex.type}</td>
+            <td>${ex.reps}</td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    // Добавить упражнение
+    function addExercise() {
+      const name = document.getElementById('exerciseName').value.trim();
+      const muscle = document.getElementById('muscleName').value.trim();
+      const type = document.getElementById('exerciseType').value.trim();
+      const reps = document.getElementById('reps').value.trim();
+
+      if (!name || !muscle || !type || !reps) {
+        alert('Заполните все поля!');
+        return;
+      }
+
+      const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
+      exercises.push({ name, muscle, type, reps });
+      localStorage.setItem('exercises', JSON.stringify(exercises));
+
+      // Очистить форму
+      document.getElementById('exerciseName').value = '';
+      document.getElementById('muscleName').value = '';
+      document.getElementById('exerciseType').value = '';
+      document.getElementById('reps').value = '';
+
+      // Перезагрузить таблицу
+      loadExercises();
+    }
+
+    // Загрузить при открытии страницы
+    loadExercises();
+  </script>
 </body>
 </html>
