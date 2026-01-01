@@ -14,7 +14,6 @@
     html, body {
       width: 100%;
       height: 100%;
-      overflow: hidden;
     }
 
     body {
@@ -24,6 +23,7 @@
       align-items: center;
       justify-content: center;
       padding: 0;
+      min-height: 100vh;
     }
 
     .phone-frame {
@@ -90,12 +90,20 @@
       background: rgba(255, 255, 255, 0.3);
     }
 
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 0 12px;
+    }
+
     .form-section {
       background: rgba(255, 255, 255, 0.95);
-      margin: 0 12px 10px;
       padding: 12px;
       border-radius: 10px;
       flex-shrink: 0;
+      margin-bottom: 10px;
     }
 
     .form-group {
@@ -150,7 +158,6 @@
       flex: 1;
       overflow-y: auto;
       overflow-x: hidden;
-      padding: 0 8px;
     }
 
     .table-container::-webkit-scrollbar {
@@ -204,16 +211,6 @@
     tbody tr:hover {
       background: rgba(102, 126, 234, 0.08);
     }
-
-    .empty-state {
-      text-align: center;
-      padding: 30px 20px;
-      color: #999;
-    }
-
-    .empty-state-text {
-      font-size: 13px;
-    }
   </style>
 </head>
 <body>
@@ -225,40 +222,43 @@
         <button class="back-btn" onclick="history.back()">← Назад</button>
       </div>
 
-      <div class="form-section">
-        <div class="form-group">
-          <label>Упражнение</label>
-          <input type="text" id="exerciseName" placeholder="Название">
+      <div class="content">
+        <div class="form-section">
+          <div class="form-group">
+            <label>Упражнение</label>
+            <input type="text" id="exerciseName" placeholder="Название">
+          </div>
+          <div class="form-group">
+            <label>Мышца</label>
+            <input type="text" id="muscleName" placeholder="Группа мышц">
+          </div>
+          <div class="form-group">
+            <label>Тип</label>
+            <input type="text" id="exerciseType" placeholder="Штанга, Гантель...">
+          </div>
+          <div class="form-group">
+            <button class="add-btn" onclick="addExercise()">+ Добавить упражнение</button>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Мышца</label>
-          <input type="text" id="muscleName" placeholder="Группа мышц">
-        </div>
-        <div class="form-group">
-          <label>Тип</label>
-          <input type="text" id="exerciseType" placeholder="Штанга, Гантель...">
-        </div>
-        <div class="form-group">
-        <button class="add-btn" onclick="addExercise()">+ Добавить упражнение</button>
-      </div>
 
-      <div class="table-container">
-        <table id="exerciseTable">
-          <thead>
-            <tr>
-              <th>Упражнение</th>
-              <th>Мышца</th>
-              <th>Тип</th>
-
-          </thead>
-          <tbody id="tableBody">
-            <tr>
-              <td colspan="4" style="text-align: center; padding: 30px 6px; color: #999;">
-                Нет упражнений. Добавьте новое!
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-container">
+          <table id="exerciseTable">
+            <thead>
+              <tr>
+                <th>Упражнение</th>
+                <th>Мышца</th>
+                <th>Тип</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <tr>
+                <td colspan="3" style="text-align: center; padding: 30px 6px; color: #999;">
+                  Нет упражнений. Добавьте новое!
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -268,16 +268,16 @@
     function loadExercises() {
       const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
       const tbody = document.getElementById('tableBody');
-      
+
       if (exercises.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 30px 6px; color: #999;">Нет упражнений. Добавьте новое!</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 30px 6px; color: #999;">Нет упражнений. Добавьте новое!</td></tr>';
       } else {
         tbody.innerHTML = exercises.map((ex, index) => `
           <tr>
             <td>${ex.name}</td>
             <td>${ex.muscle}</td>
             <td>${ex.type}</td>
-
+          </tr>
         `).join('');
       }
     }
@@ -294,7 +294,7 @@
       }
 
       const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
-      exercises.push({ name, muscle, type);
+      exercises.push({ name, muscle, type });
       localStorage.setItem('exercises', JSON.stringify(exercises));
 
       // Очистить форму
