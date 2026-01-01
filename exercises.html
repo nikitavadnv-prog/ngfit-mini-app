@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>NGFit - Exercises</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      background: #000;
+      border-radius: 50px;
+      padding: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 28px;
+      background: #000;
+      border-radius: 0 0 40px 40px;
+      z-index: 10;
+    }
+
+    .phone-content {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 40px;
+      display: flex;
+      flex-direction: column;
+      padding: 50px 0 30px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .header {
+      text-align: center;
+      padding: 0 20px 15px;
+      flex-shrink: 0;
+    }
+
+    .header-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      margin-bottom: 10px;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .back-btn:active {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .table-container {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 0 8px;
+    }
+
+    .table-container::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .table-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      overflow: hidden;
+      font-size: 12px;
+    }
+
+    thead {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    th {
+      color: #fff;
+      padding: 10px 6px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 8px 6px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      color: #333;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: rgba(102, 126, 234, 0.08);
+    }
+  </style>
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="phone-notch"></div>
+    <div class="phone-content">
+      <div class="header">
+        <div class="header-title">Exercises</div>
+        <button class="back-btn" onclick="history.back()">← Back</button>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Exercise</th>
+              <th>Muscle</th>
+              <th>Type</th>
+              <th>Reps</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Barbell Bench Press</td><td>Chest</td><td>Barbell</td><td>8-12</td></tr>
+            <tr><td>Dumbbell Bench Press</td><td>Chest</td><td>Dumbbell</td><td>8-12</td></tr>
+            <tr><td>Incline Bench Press</td><td>Chest</td><td>Barbell</td><td>8-12</td></tr>
+            <tr><td>Cable Flyes</td><td>Chest</td><td>Cable</td><td>12-15</td></tr>
+            <tr><td>Push-ups</td><td>Chest</td><td>Bodyweight</td><td>10-20</td></tr>
+            <tr><td>Dips</td><td>Chest</td><td>Bodyweight</td><td>8-12</td></tr>
+            <tr><td>Machine Chest Press</td><td>Chest</td><td>Machine</td><td>12-15</td></tr>
+            <tr><td>Barbell Row</td><td>Back</td><td>Barbell</td><td>6-10</td></tr>
+            <tr><td>Dumbbell Row</td><td>Back</td><td>Dumbbell</td><td>8-12</td></tr>
+            <tr><td>Lat Pulldown</td><td>Back</td><td>Cable</td><td>10-12</td></tr>
+            <tr><td>Pull-ups</td><td>Back</td><td>Bodyweight</td><td>8-12</td></tr>
+            <tr><td>TRX Row</td><td>Back</td><td>TRX</td><td>10-12</td></tr>
+            <tr><td>Seated Row</td><td>Back</td><td>Machine</td><td>12-15</td></tr>
+            <tr><td>Barbell Squat</td><td>Legs</td><td>Barbell</td><td>6-10</td></tr>
+            <tr><td>Dumbbell Squat</td><td>Legs</td><td>Dumbbell</td><td>8-12</td></tr>
+            <tr><td>Leg Press</td><td>Legs</td><td>Machine</td><td>10-12</td></tr>
+            <tr><td>Leg Curl</td><td>Legs</td><td>Machine</td><td>12-15</td></tr>
+            <tr><td>Leg Extension</td><td>Legs</td><td>Machine</td><td>12-15</td></tr>
+            <tr><td>Lunges</td><td>Legs</td><td>Dumbbell</td><td>10-12</td></tr>
+            <tr><td>Calf Raises</td><td>Legs</td><td>Barbell</td><td>15-20</td></tr>
+            <tr><td>Barbell Deadlift</td><td>Back</td><td>Barbell</td><td>4-8</td></tr>
+            <tr><td>Romanian Deadlift</td><td>Back</td><td>Barbell</td><td>8-10</td></tr>
+            <tr><td>Barbell Curl</td><td>Biceps</td><td>Barbell</td><td>8-12</td></tr>
+            <tr><td>Dumbbell Curl</td><td>Biceps</td><td>Dumbbell</td><td>10-12</td></tr>
+            <tr><td>Cable Curl</td><td>Biceps</td><td>Cable</td><td>10-12</td></tr>
+            <tr><td>EZ Bar Curl</td><td>Biceps</td><td>Barbell</td><td>8-12</td></tr>
+            <tr><td>Hammer Curl</td><td>Biceps</td><td>Dumbbell</td><td>10-12</td></tr>
+            <tr><td>Triceps Dips</td><td>Triceps</td><td>Bodyweight</td><td>8-12</td></tr>
+            <tr><td>Triceps Pushdown</td><td>Triceps</td><td>Cable</td><td>12-15</td></tr>
+            <tr><td>Skull Crushers</td><td>Triceps</td><td>Barbell</td><td>8-12</td></tr>
+            <tr><td>Overhead Press</td><td>Shoulders</td><td>Barbell</td><td>6-10</td></tr>
+            <tr><td>Dumbbell Shoulder Press</td><td>Shoulders</td><td>Dumbbell</td><td>8-12</td></tr>
+            <tr><td>Lateral Raise</td><td>Shoulders</td><td>Dumbbell</td><td>12-15</td></tr>
+            <tr><td>Face Pulls</td><td>Shoulders</td><td>Cable</td><td>15-20</td></tr>
+            <tr><td>Shrugs</td><td>Shoulders</td><td>Barbell</td><td>12-15</td></tr>
+            <tr><td>Plank</td><td>Core</td><td>Bodyweight</td><td>30-60s</td></tr>
+            <tr><td>Crunches</td><td>Core</td><td>Bodyweight</td><td>15-20</td></tr>
+            <tr><td>Russian Twists</td><td>Core</td><td>Bodyweight</td><td>15-20</td></tr>
+            <tr><td>Leg Raises</td><td>Core</td><td>Bodyweight</td><td>10-15</td></tr>
+            <tr><td>Cable Woodchops</td><td>Core</td><td>Cable</td><td>12-15</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
