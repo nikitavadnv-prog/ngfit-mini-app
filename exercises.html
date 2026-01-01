@@ -294,14 +294,13 @@
       }
 
       const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
-      exercises.push({ name, muscle, type, reps });
+      exercises.push({ name, muscle, type);
       localStorage.setItem('exercises', JSON.stringify(exercises));
 
       // Очистить форму
       document.getElementById('exerciseName').value = '';
       document.getElementById('muscleName').value = '';
       document.getElementById('exerciseType').value = '';
-      document.getElementById('reps').value = '';
 
       // Перезагрузить таблицу
       loadExercises();
