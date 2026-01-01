@@ -1,12 +1,4 @@
-Блин ну ржака пидор Жека<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <title>NGFit - Клиенты</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, ox;  Блин ну ржака пидор Жека Блин ну ржака пидор Жека с этой фоткой очень трогательно блин ну ржака капец и и творит и творит чудеса<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -178,12 +170,11 @@
         <div class="header-title">Клиенты</div>
         <button class="back-btn" onclick="history.back()">← Назад</button>
       </div>
-
       <div class="content">
         <div class="form-section">
           <div class="form-group">
             <label>ФИО клиента</label>
-            <input type="text" id="clientName" placeholder="Иван Ов Ов ">
+            <input type="text" id="clientName" placeholder="Иван Иванов Иванович">
           </div>
           <div class="form-group">
             <label>Номер телефона</label>
@@ -199,17 +190,14 @@
           </div>
           <div class="form-group">
             <label>Травмы</label>
-            <textarea id="clientInjuries" placeholder="Ранения, переломы..."></textarea>
+            <textarea id="clientInjuries" placeholder="Описание травм..."></textarea>
           </div>
           <div class="form-group">
             <label>Противопоказания</label>
-            <textarea id="clientContraind" placeholder="Астма, диабет..."></textarea>
+            <textarea id="clientContraind" placeholder="Противопоказания..."></textarea>
           </div>
-          <div class="form-group">
-            <button class="add-btn" onclick="addClient()">+ Добавить клиента</button>
-          </div>
+          <button class="add-btn" onclick="addClient()">+ Добавить клиента</button>
         </div>
-
         <div class="table-container">
           <table>
             <thead>
@@ -220,9 +208,7 @@
               </tr>
             </thead>
             <tbody id="clientsBody">
-              <tr>
-                <td colspan="3" style="text-align: center; color: #999;">Нет клиентов</td>
-              </tr>
+              <tr><td colspan="3" style="text-align: center; color: #999;">Нет клиентов</td></tr>
             </tbody>
           </table>
         </div>
@@ -240,7 +226,7 @@
       } else {
         tbody.innerHTML = clients.map((c, i) => `
           <tr>
-            <td title="${c.name}">${c.name.substring(0, 12)}...</td>
+            <td title="${c.name}">${c.name.substring(0, 12)}${c.name.length > 12 ? '...' : ''}</td>
             <td>${c.phone}</td>
             <td>
               <button class="action-btn" onclick="viewClient(${i})" title="Посмотреть">👁</button>
@@ -260,7 +246,7 @@
       const contraind = document.getElementById('clientContraind').value.trim();
       
       if (!name || !phone || !date) {
-        alert('Заполните основные поля!');
+        alert('Заполните основные поля (ФИО, телефон, дата)!');
         return;
       }
       
@@ -281,265 +267,7 @@
     function viewClient(i) {
       const clients = JSON.parse(localStorage.getItem('clients')) || [];
       const c = clients[i];
-      alert(`ФИО: ${c.name}\nТел: ${c.phone}\nДр: ${c.date}\nВп: ${c.habits || '-'}\nТр: ${c.injuries || '-'}\nПп: ${c.contraind || '-'}`);
-    }
-
-    function deleteClient(i) {
-      if (!confirm('Удалить клиента?')) return;
-      const clients = JSON.parse(localStorage.getItem('clients')) || [];
-      clients.splice(i, 1);
-      localStorage.setItem('clients', JSON.stringify(clients));
-      loadClients();
-    }
-
-    loadClients();
-  </script>
-</body>
-</html>{ width: 100%; height: 100%; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      min-height: 100vh;
-    }
-    .phone-frame {
-      width: 375px;
-      height: 812px;
-      background: #000;
-      border-radius: 50px;
-      padding: 12px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-      position: relative;
-      overflow: hidden;
-    }
-    .phone-notch {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 200px;
-      height: 28px;
-      background: #000;
-      border-radius: 0 0 40px 40px;
-      z-index: 10;
-    }
-    .phone-content {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 40px;
-      display: flex;
-      flex-direction: column;
-      padding: 50px 0 30px;
-      overflow: hidden;
-    }
-    .header {
-      text-align: center;
-      padding: 0 20px 15px;
-      flex-shrink: 0;
-    }
-    .header-title {
-      font-size: 20px;
-      font-weight: 700;
-      color: #fff;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      margin-bottom: 10px;
-    }
-    .back-btn {
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      padding: 0 12px;
-    }
-    .form-section {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 12px;
-      border-radius: 10px;
-      flex-shrink: 0;
-      margin-bottom: 10px;
-    }
-    .form-group {
-      margin-bottom: 10px;
-    }
-    .form-group:last-child { margin-bottom: 0; }
-    .form-group label {
-      display: block;
-      font-size: 11px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 4px;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 12px;
-    }
-    .form-group input:focus {
-      outline: none;
-      border-color: #667eea;
-      box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
-    }
-    .add-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #19c37d 0%, #1fe28f 100%);
-      color: #000;
-      border: none;
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .table-container {
-      flex: 1;
-      overflow-y: auto;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: rgba(255, 255, 255, 0.95);
-      font-size: 11px;
-    }
-    thead {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      position: sticky;
-      top: 0;
-    }
-    th, td {
-      color: #333;
-      padding: 6px 4px;
-      text-align: left;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    }
-    th {
-      color: #fff;
-      font-weight: 600;
-    }
-    .action-btn {
-      background: none;
-      border: none;
-      color: #667eea;
-      cursor: pointer;
-      font-size: 12px;
-      padding: 2px 4px;
-      margin-right: 4px;
-    }
-    .delete-btn { color: #e74c3c; }
-  </style>
-</head>
-<body>
-  <div class="phone-frame">
-    <div class="phone-notch"></div>
-    <div class="phone-content">
-      <div class="header">
-        <div class="header-title">Клиенты</div>
-        <button class="back-btn" onclick="history.back()">← Назад</button>
-      </div>
-
-      <div class="content">
-        <div class="form-section">
-          <div class="form-group">
-            <label>Имя Клиента</label>
-            <input type="text" id="clientName" placeholder="Олег">
-          </div>
-          <div class="form-group">
-            <label>Номер телефона</label>
-            <input type="tel" id="clientPhone" placeholder="+7 999 999 99 99">
-          </div>
-          <div class="form-group">
-            <label>Вост (лет)</label>
-            <input type="number" id="clientAge" placeholder="25">
-          </div>
-          <div class="form-group">
-            <button class="add-btn" onclick="addClient()">+ Добавить клиента</button>
-          </div>
-        </div>
-
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Имя</th>
-                <th>Пономер</th>
-                <th>Вост</th>
-                <th>Действия</th>
-              </tr>
-            </thead>
-            <tbody id="clientsBody">
-              <tr>
-                <td colspan="4" style="text-align: center; color: #999;">Нет клиентов</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function loadClients() {
-      const clients = JSON.parse(localStorage.getItem('clients')) || [];
-      const tbody = document.getElementById('clientsBody');
-      
-      if (clients.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">Нет клиентов</td></tr>';
-      } else {
-        tbody.innerHTML = clients.map((c, i) => `
-          <tr>
-            <td>${c.name}</td>
-            <td>${c.phone}</td>
-            <td>${c.age}</td>
-            <td>
-              <button class="action-btn" onclick="editClient(${i})">✎</button>
-              <button class="action-btn delete-btn" onclick="deleteClient(${i})">✕</button>
-            </td>
-          </tr>
-        `).join('');
-      }
-    }
-
-    function addClient() {
-      const name = document.getElementById('clientName').value.trim();
-      const phone = document.getElementById('clientPhone').value.trim();
-      const age = document.getElementById('clientAge').value.trim();
-      
-      if (!name || !phone || !age) {
-        alert('Заполните все поля!');
-        return;
-      }
-      
-      const clients = JSON.parse(localStorage.getItem('clients')) || [];
-      clients.push({ name, phone, age });
-      localStorage.setItem('clients', JSON.stringify(clients));
-      
-      document.getElementById('clientName').value = '';
-      document.getElementById('clientPhone').value = '';
-      document.getElementById('clientAge').value = '';
-      
-      loadClients();
-    }
-
-    function editClient(i) {
-      const clients = JSON.parse(localStorage.getItem('clients')) || [];
-      document.getElementById('clientName').value = clients[i].name;
-      document.getElementById('clientPhone').value = clients[i].phone;
-      document.getElementById('clientAge').value = clients[i].age;
+      alert(`ФИО: ${c.name}\nТел: ${c.phone}\nДата рождения: ${c.date}\nВредные привычки: ${c.habits || '-'}\nТравмы: ${c.injuries || '-'}\nПротивопоказания: ${c.contraind || '-'}`);
     }
 
     function deleteClient(i) {
