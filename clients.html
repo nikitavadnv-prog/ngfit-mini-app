@@ -1,280 +1,285 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NGFit - Клиенты</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGFit - Клиенты</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    html, body {
-      width: 100%;
-      height: 100%;
-    }
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      min-height: 100vh;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            min-height: 100vh;
+        }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      width: 375px;
-      height: auto;
-      background: #fff;
-      border-radius: 20px;
-      padding: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      max-height: 90vh;
-      overflow-y: auto;
-    }
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 375px;
+            height: auto;
+            background: #fff;
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #eee;
-    }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eee;
+        }
 
-    .header h1 {
-      font-size: 20px;
-      color: #333;
-    }
+        .header h1 {
+            font-size: 20px;
+            color: #333;
+        }
 
-    .back-btn {
-      background: none;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      color: #667eea;
-    }
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: #667eea;
+        }
 
-    .form-section {
-      background: #f8f9fa;
-      padding: 12px;
-      border-radius: 10px;
-      margin-bottom: 12px;
-    }
+        .form-section {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
 
-    .form-group {
-      margin-bottom: 10px;
-    }
+        .form-group {
+            margin-bottom: 10px;
+        }
 
-    .form-group label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 4px;
-    }
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
 
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 13px;
-      font-family: inherit;
-    }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: inherit;
+        }
 
-    .form-group textarea {
-      resize: vertical;
-      min-height: 50px;
-      max-height: 70px;
-    }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 50px;
+            max-height: 70px;
+        }
 
-    .add-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #19c37d 0%, #1fe28f 100%);
-      color: #fff;
-      border: none;
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-    }
+        .add-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #19c37d 0%, #1fe28f 100%);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
 
-    .add-btn:active {
-      opacity: 0.9;
-    }
+        .add-btn:active {
+            opacity: 0.9;
+        }
 
-    .table-section {
-      flex: 1;
-      overflow-y: auto;
-    }
+        .table-section {
+            flex: 1;
+            overflow-y: auto;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 11px;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
 
-    th {
-      background: #667eea;
-      color: #fff;
-      padding: 8px;
-      text-align: left;
-      font-weight: 600;
-    }
+        th {
+            background: #667eea;
+            color: #fff;
+            padding: 8px;
+            text-align: left;
+            font-weight: 600;
+        }
 
-    td {
-      padding: 8px;
-      border-bottom: 1px solid #eee;
-      color: #333;
-    }
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            color: #333;
+        }
 
-    .action-btn {
-      background: none;
-      border: none;
-      color: #667eea;
-      cursor: pointer;
-      font-size: 14px;
-      padding: 0 4px;
-      margin-right: 4px;
-    }
+        .action-btn {
+            background: none;
+            border: none;
+            color: #667eea;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0 4px;
+            margin-right: 4px;
+        }
 
-    .delete-btn {
-      color: #e74c3c;
-    }
-  </style>
+        .delete-btn {
+            color: #e74c3c;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <button class="back-btn">← Назад</button>
-      <h1>Клиенты</h1>
+    <div class="container">
+        <div class="header">
+            <button class="back-btn" onclick="goBack()">← Назад</button>
+            <h1>Клиенты</h1>
+            <div style="width: 30px;"></div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-group">
+                <label>ФИО клиента</label>
+                <input type="text" id="clientName" placeholder="Иван Иванов Иванович">
+            </div>
+
+            <div class="form-group">
+                <label>Номер телефона</label>
+                <input type="tel" id="clientPhone" placeholder="+7 999 999 99 99">
+            </div>
+
+            <div class="form-group">
+                <label>Дата рождения</label>
+                <input type="date" id="clientDate">
+            </div>
+
+            <div class="form-group">
+                <label>Вредные привычки</label>
+                <textarea id="clientHabits" placeholder="Курение, алкоголь и т.д."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Травмы</label>
+                <textarea id="clientInjuries" placeholder="Описание травм"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Противопоказания</label>
+                <textarea id="clientContraind" placeholder="Медицинские противопоказания"></textarea>
+            </div>
+
+            <button class="add-btn" id="addBtn">+ Добавить клиента</button>
+        </div>
+
+        <div class="table-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ФИО</th>
+                        <th>Тел</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody id="clientsBody">
+                    <tr>
+                        <td colspan="3" style="text-align: center; color: #999;">Нет клиентов</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="form-section">
-      <div class="form-group">
-        <label>ФИО клиента</label>
-        <input type="text" id="clientName" placeholder="Иван Иванов Иванович">
-      </div>
+    <script>
+        function goBack() {
+            window.location.href = 'index.html';
+        }
 
-      <div class="form-group">
-        <label>Номер телефона</label>
-        <input type="tel" id="clientPhone" placeholder="+7 999 999 99 99">
-      </div>
+        function loadClients() {
+            const clients = JSON.parse(localStorage.getItem('clients')) || [];
+            const tbody = document.getElementById('clientsBody');
 
-      <div class="form-group">
-        <label>Дата рождения</label>
-        <input type="date" id="clientDate">
-      </div>
+            if (clients.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #999;">Нет клиентов</td></tr>';
+            } else {
+                tbody.innerHTML = clients.map((c, i) => `
+                    <tr>
+                        <td title="${c.name}">${c.name.substring(0, 12)}${c.name.length > 12 ? '...' : ''}</td>
+                        <td>${c.phone}</td>
+                        <td>
+                            <button class="action-btn" onclick="viewClient(${i})" title="Посмотреть">👁</button>
+                            <button class="action-btn delete-btn" onclick="deleteClient(${i})">✕</button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+        }
 
-      <div class="form-group">
-        <label>Вредные привычки</label>
-        <textarea id="clientHabits" placeholder="Курение, алкоголь..."></textarea>
-      </div>
+        function addClient() {
+            const name = document.getElementById('clientName').value.trim();
+            const phone = document.getElementById('clientPhone').value.trim();
+            const date = document.getElementById('clientDate').value.trim();
+            const habits = document.getElementById('clientHabits').value.trim();
+            const injuries = document.getElementById('clientInjuries').value.trim();
+            const contraind = document.getElementById('clientContraind').value.trim();
 
-      <div class="form-group">
-        <label>Травмы</label>
-        <textarea id="clientInjuries" placeholder="Ранения, переломы..."></textarea>
-      </div>
+            if (!name || !phone || !date) {
+                alert('Заполните основные поля (ФИО, телефон, дата)!');
+                return;
+            }
 
-      <div class="form-group">
-        <label>Противопоказания</label>
-        <textarea id="clientContraind" placeholder="Астма, диабет..."></textarea>
-      </div>
+            const clients = JSON.parse(localStorage.getItem('clients')) || [];
+            clients.push({ name, phone, date, habits, injuries, contraind });
+            localStorage.setItem('clients', JSON.stringify(clients));
 
-      <button class="add-btn" id="addBtn">+ Добавить клиента</button>
-    </div>
+            document.getElementById('clientName').value = '';
+            document.getElementById('clientPhone').value = '';
+            document.getElementById('clientDate').value = '';
+            document.getElementById('clientHabits').value = '';
+            document.getElementById('clientInjuries').value = '';
+            document.getElementById('clientContraind').value = '';
 
-    <div class="table-section">
-      <table>
-        <thead>
-          <tr>
-            <th>ФИО</th>
-            <th>Тел</th>
-            <th>Действия</th>
-          </tr>
-        </thead>
-        <tbody id="clientsBody">
-          <tr>
-            <td colspan="3" style="text-align: center; color: #999;">Нет клиентов</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+            loadClients();
+        }
 
-  <script>
-    function loadClients() {
-      const clients = JSON.parse(localStorage.getItem('clients')) || [];
-      const tbody = document.getElementById('clientsBody');
-      
-      if (clients.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #999;">Нет клиентов</td></tr>';
-      } else {
-        tbody.innerHTML = clients.map((c, i) => `
-          <tr>
-            <td title="${c.name}">${c.name.substring(0, 12)}${c.name.length > 12 ? '...' : ''}</td>
-            <td>${c.phone}</td>
-            <td>
-              <button class="action-btn" onclick="viewClient(${i})" title="Посмотреть">👁</button>
-              <button class="action-btn delete-btn" onclick="deleteClient(${i})">✕</button>
-            </td>
-          </tr>
-        `).join('');
-      }
-    }
+        function viewClient(i) {
+            const clients = JSON.parse(localStorage.getItem('clients')) || [];
+            const c = clients[i];
+            alert(`ФИО: ${c.name}\nТел: ${c.phone}\nДата рождения: ${c.date}\nВредные привычки: ${c.habits || '-'}\nТравмы: ${c.injuries || '-'}\nПротивопоказания: ${c.contraind || '-'}`);
+        }
 
-    function addClient() {
-      const name = document.getElementById('clientName').value.trim();
-      const phone = document.getElementById('clientPhone').value.trim();
-      const date = document.getElementById('clientDate').value.trim();
-      const habits = document.getElementById('clientHabits').value.trim();
-      const injuries = document.getElementById('clientInjuries').value.trim();
-      const contraind = document.getElementById('clientContraind').value.trim();
+        function deleteClient(i) {
+            if (!confirm('Удалить клиента?')) return;
+            const clients = JSON.parse(localStorage.getItem('clients')) || [];
+            clients.splice(i, 1);
+            localStorage.setItem('clients', JSON.stringify(clients));
+            loadClients();
+        }
 
-      if (!name || !phone || !date) {
-        alert('Заполните основные поля (ФИО, телефон, дата)!');
-        return;
-      }
-
-      const clients = JSON.parse(localStorage.getItem('clients')) || [];
-      clients.push({ name, phone, date, habits, injuries, contraind });
-      localStorage.setItem('clients', JSON.stringify(clients));
-
-      document.getElementById('clientName').value = '';
-      document.getElementById('clientPhone').value = '';
-      document.getElementById('clientDate').value = '';
-      document.getElementById('clientHabits').value = '';
-      document.getElementById('clientInjuries').value = '';
-      document.getElementById('clientContraind').value = '';
-
-      loadClients();
-    }
-
-    function viewClient(i) {
-      const clients = JSON.parse(localStorage.getItem('clients')) || [];
-      const c = clients[i];
-      alert(`ФИО: ${c.name}\nТел: ${c.phone}\nДата рождения: ${c.date}\nВредные привычки: ${c.habits || '-'}\nТравмы: ${c.injuries || '-'}\nПротивопоказания: ${c.contraind || '-'}`);
-    }
-
-    function deleteClient(i) {
-      if (!confirm('Удалить клиента?')) return;
-      const clients = JSON.parse(localStorage.getItem('clients')) || [];
-      clients.splice(i, 1);
-      localStorage.setItem('clients', JSON.stringify(clients));
-      loadClients();
-    }
-
-    document.getElementById('addBtn').addEventListener('click', addClient);
-    loadClients();
-  </script>
+        document.getElementById('addBtn').addEventListener('click', addClient);
+        loadClients();
+    </script>
 </body>
 </html>
