@@ -1,313 +1,320 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>NGFit - Упражнения</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      min-height: 100vh;
-    }
-    .phone-frame {
-      width: 375px;
-      height: 812px;
-      background: #000;
-      border-radius: 50px;
-      padding: 12px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-      position: relative;
-      overflow: hidden;
-    }
-    .phone-notch {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 200px;
-      height: 28px;
-      background: #000;
-      border-radius: 0 0 40px 40px;
-      z-index: 10;
-    }
-    .phone-content {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 40px;
-      display: flex;
-      flex-direction: column;
-padding: 50px 0 400px;      overflow: auto;
-      position: relative;
-    }
-    .header {
-      text-align: center;
-      padding: 0 20px 15px;
-      flex-shrink: 0;
-    }
-    .header-title {
-      font-size: 20px;
-      font-weight: 700;
-      color: #fff;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      margin-bottom: 10px;
-    }
-    .back-btn {
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .back-btn:active { background: rgba(255, 255, 255, 0.3); }
-    .content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      padding: 0 12px;
-    }
-    .form-section {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 12px;
-      border-radius: 10px;
-      flex-shrink: 0;
-      margin-bottom: 10px;
-    }
-    .form-group {
-      margin-bottom: 10px;
-    }
-    .form-group:last-child { margin-bottom: 0; }
-    .form-group label {
-      display: block;
-      font-size: 11px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 4px;
-    }
-    .form-group input, .form-group select {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 12px;
-      font-family: inherit;
-    }
-    .form-group input:focus, .form-group select:focus {
-      outline: none;
-      border-color: #667eea;
-      box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
-    }
-    .add-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #19c37d 0%, #1fe28f 100%);
-      color: #000;
-      border: none;
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .add-btn:active { transform: scale(0.98); }
-    .table-container {
-      flex: 1;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-    .table-container::-webkit-scrollbar { width: 3px; }
-    .table-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 3px; }
-    .table-container::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 3px; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 8px;
-      overflow: hidden;
-      font-size: 11px;
-    }
-    thead {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      position: sticky;
-      top: 0;
-      z-index: 5;
-    }
-    th {
-      color: #fff;
-      padding: 8px 4px;
-      text-align: left;
-      font-size: 10px;
-      font-weight: 600;
-    }
-    td {
-      padding: 6px 4px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-      color: #333;
-    }
-    tr:last-child td { border-bottom: none; }
-    tbody tr:hover { background: rgba(102, 126, 234, 0.08); }
-    .action-btn {
-      background: none;
-      border: none;
-      color: #667eea;
-      cursor: pointer;
-      font-size: 12px;
-      padding: 2px 4px;
-      margin-right: 4px;
-    }
-    .action-btn:hover { text-decoration: underline; }
-    .delete-btn { color: #e74c3c; }
-  </style>
+    <meta charset="UTF-8">
+    <title>NGFit - Упражнения</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background: #000;
+            border-radius: 50px;
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 28px;
+            background: #000;
+            border-radius: 0 0 40px 40px;
+            z-index: 10;
+        }
+        .phone-content {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 40px;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 0 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            padding: 0 20px 15px;
+            flex-shrink: 0;
+        }
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .back-btn:active { background: rgba(255, 255, 255, 0.3); }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 0 12px;
+            position: relative;
+            padding-bottom: 200px;
+        }
+        .form-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            margin-bottom: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 12px;
+            right: 12px;
+            width: 351px;
+            z-index: 20;
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 0;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-group:last-child { margin-bottom: 0; }
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 12px;
+            font-family: inherit;
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+        .add-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #19c37d 0%, #1fe28f 100%);
+            color: #000;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .add-btn:active { transform: scale(0.98); }
+        .table-container {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .table-container::-webkit-scrollbar { width: 3px; }
+        .table-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 3px; }
+        .table-container::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 3px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 11px;
+        }
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+        th {
+            color: #fff;
+            padding: 8px 4px;
+            text-align: left;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        td {
+            padding: 6px 4px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            color: #333;
+        }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: rgba(102, 126, 234, 0.08); }
+        .action-btn {
+            background: none;
+            border: none;
+            color: #667eea;
+            cursor: pointer;
+            font-size: 12px;
+            padding: 2px 4px;
+            margin-right: 4px;
+        }
+        .action-btn:hover { text-decoration: underline; }
+        .delete-btn { color: #e74c3c; }
+    </style>
 </head>
 <body>
-  <div class="phone-frame">
-    <div class="phone-notch"></div>
-    <div class="phone-content">
-      <div class="header">
-        <div class="header-title">Упражнения</div>
-        <button class="back-btn" onclick="history.back()">← Назад</button>
-      </div>
-
-      <div class="content">
-        <div class="form-section">
-          <div class="form-group">
-            <label>Название упражнения</label>
-            <input type="text" id="exerciseName" placeholder="Название">
-          </div>
-          <div class="form-group">
-            <label>Группы мышц</label>
-            <input type="text" id="muscleName" placeholder="Группы мышц">
-          </div>
-          <div class="form-group">
-            <label>Тип</label>
-            <select id="exerciseType">
-              <option value="">Выберите тип</option>
-              <option value="Односуставное">Односуставное</option>
-              <option value="Многосуставное">Многосуставное</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <button class="add-btn" onclick="addExercise()">+ Добавить упражнение</button>
-          </div>
+    <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-content">
+            <div class="header">
+                <div class="header-title">Упражнения</div>
+                <button class="back-btn" onclick="history.back()">← Назад</button>
+            </div>
+            <div class="content">
+                <div class="table-container">
+                    <table id="exerciseTable">
+                        <thead>
+                            <tr>
+                                <th>Название</th>
+                                <th>Группы мышц</th>
+                                <th>Тип</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <tr>
+                                <td colspan="4" style="text-align: center; padding: 30px 4px; color: #999;">
+                                    Нет упражнений. Добавьте новое!
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-section">
+                <div class="form-group">
+                    <label>Название упражнения</label>
+                    <input type="text" id="exerciseName" placeholder="Название">
+                </div>
+                <div class="form-group">
+                    <label>Группы мышц</label>
+                    <input type="text" id="muscleName" placeholder="Группы мышц">
+                </div>
+                <div class="form-group">
+                    <label>Тип</label>
+                    <select id="exerciseType">
+                        <option value="">Выберите тип</option>
+                        <option value="Односуставное">Односуставное</option>
+                        <option value="Многосуставное">Многосуставное</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button class="add-btn" onclick="addExercise()">+ Добавить упражнение</button>
+                </div>
+            </div>
         </div>
-
-        <div class="table-container">
-          <table id="exerciseTable">
-            <thead>
-              <tr>
-                <th>Название</th>
-                <th>Группы мышц</th>
-                <th>Тип</th>
-                <th>Действия</th>
-              </tr>
-            </thead>
-            <tbody id="tableBody">
-              <tr>
-                <td colspan="4" style="text-align: center; padding: 30px 4px; color: #999;">
-                  Нет упражнений. Добавьте новое!
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
-  </div>
-
-  <script>
-    let editingIndex = -1;
-
-    function loadExercises() {
-      const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
-      const tbody = document.getElementById('tableBody');
-
-      if (exercises.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 30px 4px; color: #999;">Нет упражнений. Добавьте новое!</td></tr>';
-      } else {
-        tbody.innerHTML = exercises.map((ex, index) => `
-          <tr>
-            <td>${ex.name}</td>
-            <td>${ex.muscle}</td>
-            <td>${ex.type}</td>
-            <td>
-              <button class="action-btn" onclick="editExercise(${index})">✎ Ред</button>
-              <button class="action-btn delete-btn" onclick="deleteExercise(${index})">✕ Удал</button>
-            </td>
-          </tr>
-        `).join('');
-      }
-    }
-
-    function addExercise() {
-      const name = document.getElementById('exerciseName').value.trim();
-      const muscle = document.getElementById('muscleName').value.trim();
-      const type = document.getElementById('exerciseType').value.trim();
-
-      if (!name || !muscle || !type) {
-        alert('Заполните все поля!');
-        return;
-      }
-
-      const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
-      
-      if (editingIndex >= 0) {
-        exercises[editingIndex] = { name, muscle, type };
-        editingIndex = -1;
-        document.querySelector('.add-btn').textContent = '+ Добавить упражнение';
-      } else {
-        exercises.push({ name, muscle, type });
-      }
-      
-      localStorage.setItem('exercises', JSON.stringify(exercises));
-
-      document.getElementById('exerciseName').value = '';
-      document.getElementById('muscleName').value = '';
-      document.getElementById('exerciseType').value = '';
-
-      loadExercises();
-    }
-
-    function editExercise(index) {
-      const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
-      const exercise = exercises[index];
-      
-      document.getElementById('exerciseName').value = exercise.name;
-      document.getElementById('muscleName').value = exercise.muscle;
-      document.getElementById('exerciseType').value = exercise.type;
-      
-      editingIndex = index;
-      document.querySelector('.add-btn').textContent = '✓ Сохранить изменения';
-      document.getElementById('exerciseName').focus();
-    }
-
-    function deleteExercise(index) {
-      if (!confirm('Вы уверены, что хотите удалить это упражнение?')) return;
-      
-      const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
-      exercises.splice(index, 1);
-      localStorage.setItem('exercises', JSON.stringify(exercises));
-      
-      editingIndex = -1;
-      document.querySelector('.add-btn').textContent = '+ Добавить упражнение';
-      document.getElementById('exerciseName').value = '';
-      document.getElementById('muscleName').value = '';
-      document.getElementById('exerciseType').value = '';
-      
-      loadExercises();
-    }
-
-    loadExercises();
-  </script>
+    <script>
+        let editingIndex = -1;
+        
+        function loadExercises() {
+            const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
+            const tbody = document.getElementById('tableBody');
+            if (exercises.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 30px 4px; color: #999;">Нет упражнений. Добавьте новое!</td></tr>';
+            } else {
+                tbody.innerHTML = exercises.map((ex, index) => `
+                    <tr>
+                        <td>${ex.name}</td>
+                        <td>${ex.muscle}</td>
+                        <td>${ex.type}</td>
+                        <td>
+                            <button class="action-btn" onclick="editExercise(${index})">✎ Ред</button>
+                            <button class="action-btn delete-btn" onclick="deleteExercise(${index})">✕ Удал</button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+        }
+        
+        function addExercise() {
+            const name = document.getElementById('exerciseName').value.trim();
+            const muscle = document.getElementById('muscleName').value.trim();
+            const type = document.getElementById('exerciseType').value.trim();
+            
+            if (!name || !muscle || !type) {
+                alert('Заполните все поля!');
+                return;
+            }
+            
+            const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
+            
+            if (editingIndex >= 0) {
+                exercises[editingIndex] = { name, muscle, type };
+                editingIndex = -1;
+                document.querySelector('.add-btn').textContent = '+ Добавить упражнение';
+            } else {
+                exercises.push({ name, muscle, type });
+            }
+            
+            localStorage.setItem('exercises', JSON.stringify(exercises));
+            document.getElementById('exerciseName').value = '';
+            document.getElementById('muscleName').value = '';
+            document.getElementById('exerciseType').value = '';
+            loadExercises();
+        }
+        
+        function editExercise(index) {
+            const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
+            const exercise = exercises[index];
+            
+            document.getElementById('exerciseName').value = exercise.name;
+            document.getElementById('muscleName').value = exercise.muscle;
+            document.getElementById('exerciseType').value = exercise.type;
+            
+            editingIndex = index;
+            document.querySelector('.add-btn').textContent = '✓ Сохранить изменения';
+            document.getElementById('exerciseName').focus();
+        }
+        
+        function deleteExercise(index) {
+            if (!confirm('Вы уверены, что хотите удалить это упражнение?')) return;
+            
+            const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
+            exercises.splice(index, 1);
+            localStorage.setItem('exercises', JSON.stringify(exercises));
+            
+            editingIndex = -1;
+            document.querySelector('.add-btn').textContent = '+ Добавить упражнение';
+            document.getElementById('exerciseName').value = '';
+            document.getElementById('muscleName').value = '';
+            document.getElementById('exerciseType').value = '';
+            
+            loadExercises();
+        }
+        
+        loadExercises();
+    </script>
 </body>
 </html>
