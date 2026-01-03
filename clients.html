@@ -5,255 +5,234 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NGFit - Клиенты</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html, body {
-            width: 100%;
-            height: 100%;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0; min-height: 100vh;
         }
-        .container {
-            display: flex;
-            flex-direction: column;
-            width: 375px;
-            height: auto;
-            background: #fff;
-            border-radius: 20px;
-            padding: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            max-height: 90vh;
-            overflow-y: auto;
+        .phone-frame {
+            width: 375px; height: 812px; background: #000; border-radius: 50px; padding: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative; overflow: hidden;
         }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #eee;
+        .phone-notch {
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 200px; height: 28px; background: #000; border-radius: 0 0 40px 40px; z-index: 10;
         }
-        .header h1 {
-            font-size: 20px;
-            color: #333;
+        .phone-content {
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 40px; display: flex; flex-direction: column; padding: 50px 0 30px;
+            overflow: hidden; position: relative;
+        }
+        .header { text-align: center; padding: 0 20px 15px; flex-shrink: 0; }
+        .header-title {
+            font-size: 20px; font-weight: 700; color: #fff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); margin-bottom: 10px;
         }
         .back-btn {
-            background: none;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-            color: #667eea;
+            background: rgba(255, 255, 255, 0.2); color: #fff; border: none;
+            padding: 8px 16px; border-radius: 20px; font-size: 12px;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .back-btn:active { background: rgba(255, 255, 255, 0.3); }
+        .content {
+            flex: 1; display: flex; flex-direction: column; overflow: hidden; padding: 0 12px;
         }
         .form-section {
-            background: #f8f9fa;
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.95); padding: 12px; border-radius: 10px;
+            flex-shrink: 0; margin-bottom: 10px; max-height: 45%; overflow-y: auto;
         }
-        .form-group {
-            margin-bottom: 10px;
-        }
+        .form-section::-webkit-scrollbar { width: 2px; }
+        .form-section::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.05); }
+        .form-section::-webkit-scrollbar-thumb { background: rgba(102, 126, 234, 0.3); }
+        .form-group { margin-bottom: 8px; }
+        .form-group:last-child { margin-bottom: 0; }
         .form-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 4px;
+            display: block; font-size: 10px; font-weight: 600; color: #333; margin-bottom: 3px;
         }
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 13px;
-            font-family: inherit;
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 6px; border: 1px solid #ddd; border-radius: 6px;
+            font-size: 11px; font-family: inherit; resize: vertical;
         }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 50px;
-            max-height: 70px;
+        .form-group textarea { min-height: 35px; max-height: 50px; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none; border-color: #667eea; box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
         }
         .add-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #19c37d 0%, #1fe28f 100%);
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
+            width: 100%; background: linear-gradient(135deg, #19c37d 0%, #1fe28f 100%);
+            color: #000; border: none; padding: 8px; border-radius: 8px;
+            font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s;
         }
-        .add-btn:active {
-            opacity: 0.9;
-        }
-        .table-section {
-            flex: 1;
-            overflow-y: auto;
-        }
+        .add-btn:active { transform: scale(0.98); }
+        .table-container { flex: 1; overflow-y: auto; overflow-x: hidden; }
+        .table-container::-webkit-scrollbar { width: 3px; }
+        .table-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); }
+        .table-container::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); }
         table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 11px;
+            width: 100%; border-collapse: collapse; background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px; overflow: hidden; font-size: 10px;
         }
-        th {
-            background: #667eea;
-            color: #fff;
-            padding: 8px;
-            text-align: left;
-            font-weight: 600;
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: sticky; top: 0; z-index: 5;
         }
-        td {
-            padding: 8px;
-            border-bottom: 1px solid #eee;
-            color: #333;
-        }
+        th { color: #fff; padding: 6px 3px; text-align: left; font-size: 9px; font-weight: 600; }
+        td { padding: 5px 3px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); color: #333; }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: rgba(102, 126, 234, 0.08); }
         .action-btn {
-            background: none;
-            border: none;
-            color: #667eea;
-            cursor: pointer;
-            font-size: 14px;
-            padding: 0 4px;
-            margin-right: 4px;
+            background: none; border: none; color: #667eea; cursor: pointer; font-size: 10px;
+            padding: 1px 2px; margin-right: 2px;
         }
-        .delete-btn {
-            color: #e74c3c;
-        }
+        .action-btn:hover { text-decoration: underline; }
+        .delete-btn { color: #e74c3c; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <button class="back-btn" onclick="goBack()">← Назад</button>
-            <h1>Клиенты</h1>
-            <div style="width: 30px;"></div>
-        </div>
-
-        <div class="form-section">
-            <div class="form-group">
-                <label>ФИО клиента</label>
-                <input type="text" id="clientName" placeholder="Иван Иванов Иванович">
+    <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-content">
+            <div class="header">
+                <h1 class="header-title">👥 Клиенты</h1>
+                <button class="back-btn" onclick="goBack()">← Назад</button>
             </div>
-            <div class="form-group">
-                <label>Номер телефона</label>
-                <input type="tel" id="clientPhone" placeholder="+7 999 999 99 99">
+            <div class="content">
+                <div class="form-section">
+                    <div class="form-group">
+                        <label>ФИО</label>
+                        <input type="text" id="clientName" placeholder="Фамилия Имя Отчество">
+                    </div>
+                    <div class="form-group">
+                        <label>Дата рождения</label>
+                        <input type="date" id="clientBirthDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Номер телефона</label>
+                        <input type="tel" id="clientPhone" placeholder="+7 (999) 999-99-99">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="clientEmail" placeholder="example@mail.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Травмы и противопоказания</label>
+                        <textarea id="clientInjuries" placeholder="Укажите если есть"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Хронические заболевания</label>
+                        <textarea id="clientDiseases" placeholder="Укажите если есть"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Опыт тренировок</label>
+                        <select id="clientExperience">
+                            <option value="">Выберите опыт</option>
+                            <option value="Без опыта">Без опыта</option>
+                            <option value="До 1 года">До 1 года</option>
+                            <option value="1-3 года">1-3 года</option>
+                            <option value="Более 3 лет">Более 3 лет</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Вредные привычки</label>
+                        <textarea id="clientHabits" placeholder="Укажите если есть"></textarea>
+                    </div>
+                    <button class="add-btn" onclick="addClient()">+ Добавить</button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ФИО</th>
+                                <th>Рождение</th>
+                                <th>Опыт</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <tr><td colspan="4" style="text-align:center;padding:20px;color:#999;">Нет данных</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Дата рождения</label>
-                <input type="date" id="clientDate">
-            </div>
-            <div class="form-group">
-                <label>Вредные привычки</label>
-                <textarea id="clientHabits" placeholder="Курение, алкоголь и т.д."></textarea>
-            </div>
-            <div class="form-group">
-                <label>Травмы</label>
-                <textarea id="clientInjuries" placeholder="Описание травм"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Противопоказания</label>
-                <textarea id="clientContraind" placeholder="Медицинские противопоказания"></textarea>
-            </div>
-            <button class="add-btn" id="addBtn">+ Добавить клиента</button>
-        </div>
-
-        <div class="table-section">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ФИО</th>
-                        <th>Тел</th>
-                        <th>Действия</th>
-                    </tr>
-                </thead>
-                <tbody id="clientsBody">
-                    <tr>
-                        <td colspan="3" style="text-align: center; color: #999;">Нет клиентов</td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 
     <script>
-        function goBack() {
-            window.location.href = 'index.html';
-        }
-
+        let editingIndex = -1;
         function loadClients() {
             const clients = JSON.parse(localStorage.getItem('clients')) || [];
-            const tbody = document.getElementById('clientsBody');
-
+            const tbody = document.getElementById('tableBody');
             if (clients.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #999;">Нет клиентов</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:20px;color:#999;">Нет данных</td></tr>';
             } else {
-                tbody.innerHTML = clients.map((c, i) => `
-                    <tr>
-                        <td title="${c.name}">${c.name.substring(0, 12)}${c.name.length > 12 ? '...' : ''}</td>
-                        <td>${c.phone}</td>
-                        <td>
-                            <button class="action-btn" onclick="viewClient(${i})" title="Посмотреть">👁</button>
-                            <button class="action-btn delete-btn" onclick="deleteClient(${i})">✕</button>
-                        </td>
-                    </tr>
-                `).join('');
+                tbody.innerHTML = clients.map((c, i) => `<tr><td>${c.name}</td><td>${c.birthDate || '-'}</td><td>${c.experience}</td><td><button class="action-btn" onclick="editClient(${i})">✎</button> <button class="action-btn delete-btn" onclick="deleteClient(${i})">✕</button></td></tr>`).join('');
             }
         }
-
         function addClient() {
             const name = document.getElementById('clientName').value.trim();
+            const birthDate = document.getElementById('clientBirthDate').value;
             const phone = document.getElementById('clientPhone').value.trim();
-            const date = document.getElementById('clientDate').value.trim();
-            const habits = document.getElementById('clientHabits').value.trim();
+            const email = document.getElementById('clientEmail').value.trim();
             const injuries = document.getElementById('clientInjuries').value.trim();
-            const contraind = document.getElementById('clientContraind').value.trim();
-
-            if (!name || !phone || !date) {
-                alert('Заполните основные поля (ФИО, телефон, дата)!');
+            const diseases = document.getElementById('clientDiseases').value.trim();
+            const experience = document.getElementById('clientExperience').value;
+            const habits = document.getElementById('clientHabits').value.trim();
+            if (!name || !birthDate || !phone || !email || !experience) {
+                alert('Заполните обязательные поля!');
                 return;
             }
-
             const clients = JSON.parse(localStorage.getItem('clients')) || [];
-            clients.push({ name, phone, date, habits, injuries, contraind });
+            if (editingIndex >= 0) {
+                clients[editingIndex] = {name, birthDate, phone, email, injuries, diseases, experience, habits};
+                editingIndex = -1;
+                document.querySelector('.add-btn').textContent = '+ Добавить';
+            } else {
+                clients.push({name, birthDate, phone, email, injuries, diseases, experience, habits});
+            }
             localStorage.setItem('clients', JSON.stringify(clients));
-
-            document.getElementById('clientName').value = '';
-            document.getElementById('clientPhone').value = '';
-            document.getElementById('clientDate').value = '';
-            document.getElementById('clientHabits').value = '';
-            document.getElementById('clientInjuries').value = '';
-            document.getElementById('clientContraind').value = '';
-
+            clearForm();
             loadClients();
         }
-
-        function viewClient(i) {
+        function editClient(i) {
             const clients = JSON.parse(localStorage.getItem('clients')) || [];
             const c = clients[i];
-            alert(`ФИО: ${c.name}\nТел: ${c.phone}\nДата рождения: ${c.date}\nВредные привычки: ${c.habits || '-'}\nТравмы: ${c.injuries || '-'}\nПротивопоказания: ${c.contraind || '-'}`);
+            document.getElementById('clientName').value = c.name;
+            document.getElementById('clientBirthDate').value = c.birthDate || '';
+            document.getElementById('clientPhone').value = c.phone;
+            document.getElementById('clientEmail').value = c.email;
+            document.getElementById('clientInjuries').value = c.injuries || '';
+            document.getElementById('clientDiseases').value = c.diseases || '';
+            document.getElementById('clientExperience').value = c.experience;
+            document.getElementById('clientHabits').value = c.habits || '';
+            editingIndex = i;
+            document.querySelector('.add-btn').textContent = '✓ Сохранить';
+            document.getElementById('clientName').focus();
         }
-
         function deleteClient(i) {
             if (!confirm('Удалить клиента?')) return;
             const clients = JSON.parse(localStorage.getItem('clients')) || [];
             clients.splice(i, 1);
             localStorage.setItem('clients', JSON.stringify(clients));
+            editingIndex = -1;
+            clearForm();
             loadClients();
         }
-
-        document.getElementById('addBtn').addEventListener('click', addClient);
+        function clearForm() {
+            document.getElementById('clientName').value = '';
+            document.getElementById('clientBirthDate').value = '';
+            document.getElementById('clientPhone').value = '';
+            document.getElementById('clientEmail').value = '';
+            document.getElementById('clientInjuries').value = '';
+            document.getElementById('clientDiseases').value = '';
+            document.getElementById('clientExperience').value = '';
+            document.getElementById('clientHabits').value = '';
+            document.querySelector('.add-btn').textContent = '+ Добавить';
+        }
+        function goBack() { window.history.back(); }
         loadClients();
     </script>
 </body>
